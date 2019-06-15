@@ -85,7 +85,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
-
+                            OnAuth(task.getResult().getUser());
                             Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
                             startActivity(intent);
                         }
@@ -134,4 +134,6 @@ public class RegistrationActivity extends AppCompatActivity {
     public String getUserEmail() {
         return email;
     }
+
+
 }
