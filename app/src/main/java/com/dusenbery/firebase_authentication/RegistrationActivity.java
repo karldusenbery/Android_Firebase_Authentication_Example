@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,14 +16,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText emailTV, passwordTV;
+    private EditText etFirstName, etLastName, etEmail, etPassword;
     private Button regBtn;
     private ProgressBar progressBar;
 
     private FirebaseAuth mAuth;
+    private DatabaseReference myDatabase;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +47,13 @@ public class RegistrationActivity extends AppCompatActivity {
     private void registerNewUser() {
         progressBar.setVisibility(View.VISIBLE);
 
-        String email, password;
-        email = emailTV.getText().toString();
-        password = passwordTV.getText().toString();
+        String firstName, lastName, email, password;
+        firstName = etFirstName.getText().toString();
+        Log.d("NAME",firstName);
+        lastName = etLastName.getText().toString();
+        Log.d("NAME",lastName);
+        email = etEmail.getText().toString();
+        password = etPassword.getText().toString();
 
         if (TextUtils.isEmpty(email)) {
             Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
@@ -75,9 +83,13 @@ public class RegistrationActivity extends AppCompatActivity {
                 });
     }
 
+
+
     private void initializeUI() {
-        emailTV = findViewById(R.id.email);
-        passwordTV = findViewById(R.id.password);
+        etFirstName = findViewById(R.id.firstName);
+        etLastName = findViewById(R.id.lastName);
+        etEmail = findViewById(R.id.email);
+        etPassword = findViewById(R.id.password);
         regBtn = findViewById(R.id.register);
         progressBar = findViewById(R.id.progressBar);
     }
